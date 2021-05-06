@@ -7,4 +7,35 @@ eredményei alapján (lásd példa kimenet). Pontozás: győzelem: 3 pont, dönt
 vereség: 0pont. Ha két csapat azonos pontszámmal végez, akkor közöttük a gólkülönbség
 (rúgott gólok – kapott gólok) rangsorol."""
 
-import numpy
+import numpy as np
+import random
+import itertools
+
+
+while True:
+    n=input("Adjon meg egy számot:")
+    if n.isnumeric():   #ellenőrizzük, hogy az input szám e
+        n=int(n)
+        if n<=1:    #Ellenőrizzük, hogy a megadott szám nagyobb e egynél, ugyanis egy csapat nem tud versenyezni
+            print("Kérem legalább kettőt adjon meg")
+        else:
+            break
+    else:
+        print("Kérem számot adjon meg")
+
+csapatok=[""]
+csapatok[0]=input("Adjon meg egy csapat nevet ")
+db=1
+
+while True:
+    tmp=input("Adjon meg egy csapat nevet ")
+    if tmp in csapatok:     #Ellenőrizzük, hogy a csapatnév szerepel e már a listában
+        print("Ez a csapat már a listában van kérem adjon meg másik csapat nevet")
+    else:
+        csapatok.append(tmp)
+        db+=1
+        if db==n:
+            break
+
+csapat_parok=list(itertools.combinations(csapatok, 2))      #megalkotjuk a csapatpárokat
+print(csapatok,csapat_parok)
