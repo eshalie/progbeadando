@@ -38,4 +38,11 @@ while True:
             break
 
 csapat_parok=list(itertools.combinations(csapatok, 2))      #megalkotjuk a csapatpárokat
-print(csapatok,csapat_parok)
+rand=np.random.randint(0,10,n)
+eredmenyek=list(itertools.combinations(rand, 2))
+random.shuffle(eredmenyek)
+"""pontok=[]
+for i in range(len(csapatok)):
+    if eredmenyek[i]:"""
+print(csapatok,csapat_parok, rand, eredmenyek)
+
