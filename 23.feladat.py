@@ -6,3 +6,5 @@ kimenet alapján kiír a program. A program végül készítsen egy eredménytá
 eredményei alapján (lásd példa kimenet). Pontozás: győzelem: 3 pont, döntetlen: 1 pont,
 vereség: 0pont. Ha két csapat azonos pontszámmal végez, akkor közöttük a gólkülönbség
 (rúgott gólok – kapott gólok) rangsorol."""
+
+import numpy
