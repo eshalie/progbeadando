@@ -17,9 +17,9 @@ def eredmeny(csapatok):
     eredmenyek={}
     for i in range(0,len(csapatok)-1):
             for j in range(i+1,len(csapatok)):
-                gol1 = str(random.randint(0,4))
-                gol2= str(random.randint(0,4))
-                eredmenyek[f'{csapatok[i]} {csapatok[j]}'] = f'{gol1}:{gol2}'
+                gol1 = str(random.randint(0,5))
+                gol2= str(random.randint(0,5))
+                eredmenyek[f'{csapatok[i]} - {csapatok[j]}'] = f'{gol1}:{gol2}'
     return eredmenyek
 
 
@@ -30,13 +30,13 @@ def pontszamitas(eredmenyek):
 
     for i in range(len(csapatok)):
         for kulcs, ertek in eredmenyek.items():
-            kulcs=kulcs.split()
+            kulcs=kulcs.split(' - ')
             ertek=ertek.split(':')
             otthoni=kulcs[0]
             otthonigol=int(ertek[0])
             vendeg=kulcs[1]
             vendeggol=int(ertek[1])
-            if kulcs[i]==otthoni:
+            if csapatok[i]==otthoni:
                 if otthonigol>vendeggol:
                     pontok[i]+=3
                 elif otthonigol==vendeggol:
@@ -53,7 +53,7 @@ def pontszamitas(eredmenyek):
     return pontok, rugottgol, kapottgol
 
 
-def allas(pontok,rugottgolok,kapottgolok,csapatok):
+def allas(pontok,rugottgolok,kapottgolok,csapatok,n):
     for i in range(0,len(pontok)-1):
         for j in range(i+1,len(pontok)):
             if pontok[i] < pontok[j]:
@@ -68,8 +68,15 @@ def allas(pontok,rugottgolok,kapottgolok,csapatok):
                     rugottgolok[i], rugottgolok[j] = rugottgolok[j], rugottgolok[i]
                     kapottgolok[i], kapottgolok[j] = kapottgolok[j], kapottgolok[i]
                     csapatok[i], csapatok[j] = csapatok[j], csapatok[i]
+
+    pontok=pontok.astype(int)
+    rugottgolok=rugottgolok.astype(int)
+    kapottgolok=kapottgolok.astype(int)
+
     print("Pontállás:")
-    print("Helyezés Név Pont Rúgott gólok Kapott gólok",i,csapatok[i],rugottgolok[i],kapottgolok[i])
+    print(f'{"Helyezés":<10}', f'{"Név":<14}', f'{"Pont":<10}', f'{"Rúgott gólok":<14}', f'{"Kapott gólok":<14}')
+    for i in range(n):
+        print(f'{i+1:<1}'+f'{".":<9}', f'{csapatok[i]:<14}', f'{pontok[i]:<10}', f'{rugottgolok[i]:<14}', f'{kapottgolok[i]:<14}')
 
 
 
@@ -100,5 +107,16 @@ while True:
         if db==n:
             break
 
-pontok, rugottgol , kapottgol=pontszamitas(eredmeny(csapatok))
-allas(pontok,rugottgol,kapottgol,csapatok)
+eredmenyek=eredmeny(csapatok)
+pontok, rugottgol , kapottgol=pontszamitas(eredmenyek)
+
+print("")
+
+for kulcs, ertek in eredmenyek.items():
+        print(f'{kulcs} {ertek}')
+
+print("")
+print("----------")
+print("")
+
+allas(pontok,rugottgol,kapottgol,csapatok,n)
