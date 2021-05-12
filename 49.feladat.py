@@ -41,9 +41,11 @@ try:
         sall = sall.lower().split(",")
         for i in range(len(allergenek)):
             for j in range(len(sall)):
-                if sall[j]==csapatok[i]:
+                if sall[j]==allergenek[i]:
                     szaml+=1
         if szaml==len(sall):
+            break
+        elif sall=="nincs":
             break
         else:
             print("Kérem allergént adjon meg")
