@@ -11,10 +11,10 @@ def atvaltas(klm):
     m=int(tmp[2])
     tizes = 0
     if l <= 10:
-        szamjegyek = [int(i) for i in str(k)]
+        szamjegyek = [int(i) for i in str(k)] #végigmegy a számon majd minden jegyet átvált int-é
     else:
-        szamjegyek = [int(i, l) for i in str(k)]
-    szamjegyek = szamjegyek[::-1]
+        szamjegyek = [int(i, l) for i in str(k)] #ha esetleg nagyobb a számrendszer mint 10 és betű van akkor átváltja a számjegyet tizesbe
+    szamjegyek = szamjegyek[::-1] #megfordítjuk a sorrendjét a számjegyeknek
     for i in range(len(szamjegyek)):
         tizes += szamjegyek[i] * l ** i
     atvaltott=np.base_repr(tizes,base=m)
