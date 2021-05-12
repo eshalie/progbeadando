@@ -9,12 +9,14 @@ def atvaltas(klm):
     k=int(tmp[0])
     l=int(tmp[1])
     m=int(tmp[2])
+
     tizes = 0
     if l <= 10:
         szamjegyek = [int(i) for i in str(k)] #végigmegy a számon majd minden jegyet átvált int-é
     else:
         szamjegyek = [int(i, l) for i in str(k)] #ha esetleg nagyobb a számrendszer mint 10 és betű van akkor átváltja a számjegyet tizesbe
     szamjegyek = szamjegyek[::-1] #megfordítjuk a sorrendjét a számjegyeknek
+
     for i in range(len(szamjegyek)):
         tizes += szamjegyek[i] * l ** i
     atvaltott=np.base_repr(tizes,base=m)
@@ -24,6 +26,7 @@ def atvaltas(klm):
 try:
     ifile = open("input.txt","r")
     ofile = open("output.txt", "w")
+
     sorok=ifile.readlines()
     for i in sorok:
         tmp1,tmp2=atvaltas(i)
@@ -33,6 +36,7 @@ try:
         ofile.write(", ")
         ofile.write(tmp2)
         ofile.write("\n")
+
     ifile.close()
     ofile.close()
 except FileNotFoundError:

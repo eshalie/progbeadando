@@ -31,13 +31,27 @@ def sajatallergia(sall,allergenek,szaml):
 try:
     ifile = open("input2.txt","r",encoding='utf-8')
     afile=open("allergen.txt","r",encoding='utf-8')
+
     allergenek=afile.read().lower().split(", ")
     osszetevok=ifile.read().lower().split(", ")
-    sall=input("Kérem adja meg allergéneit vesszővel elválasztva: ")
-    sall=sall.lower().split(",")
+
+    while True:
+        szaml=0
+        sall=input("Kérem adja meg allergéneit vesszővel elválasztva: ")
+        sall = sall.lower().split(",")
+        for i in range(len(allergenek)):
+            for j in range(len(sall)):
+                if sall[j]==csapatok[i]:
+                    szaml+=1
+        if szaml==len(sall):
+            break
+        else:
+            print("Kérem allergént adjon meg")
+
     szaml=szamlalo(osszetevok,allergenek)
     sallsz=sajatallergia(sall,allergenek,szaml)
     oszlopok=plt.bar(allergenek, szaml, color="Blue")
+
     plt.xticks(fontsize=10, rotation=45)
     plt.xlabel("Allergének")
     plt.ylabel("Előfordulás")
@@ -46,6 +60,7 @@ try:
             oszlopok[i].set_color('r')
     plt.savefig("49/kutatas.png")
     plt.show()
+
     afile.close()
     ifile.close()
 except FileNotFoundError:
