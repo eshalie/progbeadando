@@ -36,4 +36,4 @@ try:
     ifile.close()
     ofile.close()
 except FileNotFoundError:
-    print("input.txt is not exists")
+    print("input.txt nem létezik")
